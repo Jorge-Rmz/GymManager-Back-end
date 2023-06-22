@@ -44,7 +44,25 @@ namespace GymManager.DataAccess.Repositories
 
         public override IQueryable<Attendance> GetAll() 
         {
-            return Context.Attendances.Include(x => x.Member);
+            return Context.Attendances
+            .Include(a => a.Member)
+            .ThenInclude(m => m.City)
+            .Include(a => a.Member)
+            .ThenInclude(m => m.MembershipType);
         }
+
+        public override async Task<Attendance> GetAsync(int id)
+        {
+            var attendance = await Context.Attendances
+             .Include(a => a.Member)
+            .ThenInclude(m => m.City)
+            .Include(a => a.Member)
+            .ThenInclude(m => m.MembershipType)
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+            return attendance;
+        }
+
+
     }
 }

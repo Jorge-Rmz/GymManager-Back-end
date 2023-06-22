@@ -46,7 +46,7 @@ namespace GymManager.ApplicationServices.Attendances
         public async Task DeleteAttendanceAsync(int memberId)
         {
             var attendances = await _repository.GetAll().ToListAsync();
-            var attendance = attendances.Where(x => x.Member.Id == memberId)
+            var attendance = attendances.Where(x => x.Id == memberId)
                 .OrderByDescending(x => x.DateIn)
                 .FirstOrDefault();
 

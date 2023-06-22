@@ -64,8 +64,6 @@ namespace GymManager.Api.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> Post(int id)
         {
-            
-
             if (ModelState.IsValid)
             {
                 await _attendanceService.AddAttendanceAsync(id);
